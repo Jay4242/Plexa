@@ -1,4 +1,4 @@
-# The script of the game goes in this file.
+﻿# The script of the game goes in this file.
 
 #Init python things
 init python:
@@ -54,7 +54,7 @@ label start:
 
         #Get the list of genres in the user's Plex.
         $ url = f"{plexurl}/library/sections/1/genre?X-Plex-Token={token}"
-        $ genres = renpy.fetch(url , json=None, method="GET", timeout=60, result='text')
+        $ genres = renpy.fetch(url , json=None, method="GET", timeout=360, result='text')
 
         #Split each genre into the number,name pairs in an array.
         $ tree = ET.fromstring(genres)
@@ -74,7 +74,7 @@ label start:
         $ data = { "model": "lmstudio-community/gemma-2-2b-it-q8_0", "messages": [ {"role": "system", "content": system_message}, {"role": "user", "content": user_message}], "temperature": temp, "max_tokens": -1, "stream": False }
 
         #Make the localLLM call.
-        $ comment = renpy.fetch(llama_addy, json=data, method="POST", timeout=60, result='json')
+        $ comment = renpy.fetch(llama_addy, json=data, method="POST", timeout=360, result='json')
 
         #Strip the response down to just the answer.
         $ comment = comment['choices'][0]['message']['content'].strip()
@@ -91,7 +91,7 @@ label start:
         $ url = f"{plexurl}/library/sections/1/genre/{genre}?X-Plex-Token={token}"
 
         #Fetch the movie list from Plex.
-        $ movies = renpy.fetch(url , json=None, method="GET", timeout=60, result='text')
+        $ movies = renpy.fetch(url , json=None, method="GET", timeout=360, result='text')
 
         #Clean up the movie list. Collect title, description, etc.
         $ tree = ET.fromstring(movies)
@@ -138,7 +138,7 @@ label start:
         $ data = { "model": "lmstudio-community/gemma-2-2b-it-q8_0", "messages": [ {"role": "system", "content": system_message}, {"role": "user", "content": user_message}], "temperature": temp, "max_tokens": -1, "stream": False }
 
         #Make the localLLM call.
-        $ comment = renpy.fetch(llama_addy, json=data, method="POST", timeout=60, result='text')
+        $ comment = renpy.fetch(llama_addy, json=data, method="POST", timeout=360, result='text')
 
         #Clean up the response.
         $ comment = json.loads(comment)
@@ -160,7 +160,7 @@ label start:
         $ url = f"{plexurl}/library/sections/1/unwatched?X-Plex-Token={token}"
 
         #Getting the list of unwatched Plex videos.
-        $ movies = renpy.fetch(url , json=None, method="GET", timeout=60, result='text')
+        $ movies = renpy.fetch(url , json=None, method="GET", timeout=360, result='text')
 
         #Start to clean up the list.  Extract title, description, etc.
         $ tree = ET.fromstring(movies)
@@ -207,7 +207,7 @@ label start:
         $ data = { "model": "lmstudio-community/gemma-2-2b-it-q8_0", "messages": [ {"role": "system", "content": system_message}, {"role": "user", "content": user_message}], "temperature": temp, "max_tokens": -1, "stream": False }
 
         #Make the localLLM call.
-        $ comment = renpy.fetch(llama_addy, json=data, method="POST", timeout=60, result='text')
+        $ comment = renpy.fetch(llama_addy, json=data, method="POST", timeout=360, result='text')
 
         #Start to clean up the response.
         $ comment = json.loads(comment)
