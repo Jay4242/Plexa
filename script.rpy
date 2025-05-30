@@ -31,7 +31,7 @@ label start:
 
     #Set the localllama API address.
     $ llama = renpy.input("Where is your local openAI API server? (server):(port): ")
-    $ llama_addy = f"http://{llama}/v1/chat/completions/"
+    $ llama_addy = f"http://{llama}/v1/chat/completions"
 
     #Show Plexa, our friendly video mascot.
     show plexa happy at left:
